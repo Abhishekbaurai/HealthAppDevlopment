@@ -1,0 +1,19 @@
+/* /Pages/Description.razor.rz.scp.css */
+.card-container[b-81dntyzvcu] {
+    border-radius: 20px !important;
+}
+
+#image-container[b-81dntyzvcu] {
+    position: relative;
+}
+#image-title-container[b-81dntyzvcu] {
+    position: absolute;
+    top: 135px;
+}
+
+
+/* /Shared/MainLayout.razor.rz.scp.css */
+.content[b-alskh9ix2d]{
+    padding:0 !important;
+    margin:0 !important;.
+}

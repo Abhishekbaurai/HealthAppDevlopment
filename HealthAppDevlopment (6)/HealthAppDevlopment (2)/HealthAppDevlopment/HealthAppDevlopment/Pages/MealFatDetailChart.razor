@@ -1,0 +1,36 @@
+﻿@using Radzen
+@using Radzen.Blazor
+
+<RadzenCard Text=".rz-border-radius-6" Class="rz-border-radius-6 mb-1">
+    @if (mealDescription != null)
+    {
+        <div class="row mx-2">
+            <RadzenText TagName="TagName.H3" class="px-2 mt-3" Style="font-size:20px;padding:0">Calories</RadzenText>
+            <div class="col-7" style="padding-left:0;">
+                <RadzenText TextStyle="TextStyle.H3" class="h3">@mealDescription.Calories Cal</RadzenText>
+            </div>
+            <div class="col-5" style="padding-left:0;">
+                <RadzenText class="h6" Style="float:right;text-align:center;">Net wt:@mealDescription.NetWeight g</RadzenText>
+            </div>
+            <hr />
+        </div>
+        @foreach (var demo in mealDescription.Nutrients)
+        {
+            <div class="row mx-2">
+                <div class="col" style="padding-right:0;">
+                    <i class="@demo.NutrientIconLink"></i>
+                    <radzentext textstyle="textstyle.h6" class="h6 mx-1">
+                        @demo.NutrientType
+                    </radzentext>
+                </div>
+                <div class="col">
+                    <radzentext style="float:right">@demo.NutrientValue g</radzentext>
+                </div>
+            </div>
+        }
+    }
+</RadzenCard>
+@code {
+    [Parameter]
+    public MealDescription mealDescription { get; set; }
+}

@@ -1,0 +1,13 @@
+﻿.card-container {
+    border-radius: 20px !important;
+}
+
+#image-container {
+    position: relative;
+}
+#image-title-container {
+    position: absolute;
+    top: 135px;
+}
+
+

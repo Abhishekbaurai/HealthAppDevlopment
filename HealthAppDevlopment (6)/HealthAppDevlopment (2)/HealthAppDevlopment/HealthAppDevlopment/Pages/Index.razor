@@ -1,0 +1,65 @@
+﻿@page "/index"
+@using Radzen
+@using Radzen.Blazor
+@using HealthAppDevlopment.DataModels
+@inject HttpClient Http
+@using HealthAppDevlopment.Services
+@inject IBaseApiClient BaseApiClient
+<style>
+	.rz-datepicker.rz-popup {
+		width: 276px !important;
+	}
+</style>
+<div class="container-fluid m-0 p-0">
+	<RadzenCard Style="background-color:#F4F7FC; border-radius:20px;" class="">
+		<RadzenCard Style="background-color:#152232; border-radius:12px">
+			<div class="row d-flex justify-content-center">
+				<div class="col-lg-3 col-md-4 col-sm-10 px-sm-2">
+					<RadzenDatePicker @bind-Value="value" style="width:100%;margin:5px;" DateFormat="d"></RadzenDatePicker>
+				</div>
+			</div>
+		</RadzenCard>
+		<br />
+		@*Adding list of MealType*@
+		@if (MealInformation != null)
+		{
+			@foreach (var meals in MealInformation)
+			{
+				<MealDetail Meal=@meals></MealDetail>
+			}
+		}
+
+	</RadzenCard>
+</div>
+@code {
+	public string BaseUrl = "https://myhealthdiet.azurewebsites.net";
+	public string Error;
+	DateTime? value = DateTime.Now;
+	public FamilyDetail? Families { get; set; }
+	public MealModel[] MealInformation { get; set; }
+	protected override async Task OnInitializedAsync()
+	{
+		try
+		{
+			MealInformation = await BaseApiClient.RequestForGetMealTypes<MealModel[]>(BaseUrl + "/Meal/GetMealTypes", "POST");
+		}
+		catch (Exception e)
+		{
+			Error = e.Message;
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

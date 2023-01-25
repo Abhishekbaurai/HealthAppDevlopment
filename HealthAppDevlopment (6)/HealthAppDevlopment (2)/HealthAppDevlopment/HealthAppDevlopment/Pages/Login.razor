@@ -1,0 +1,59 @@
+﻿@page "/"
+@inject NavigationManager NavManager
+<PageTitle>Welcome</PageTitle>
+<div class="container-fluid">
+    <div class="row px-3">
+        <div class="col-lg-4 col-md-8 p-3 login-container" style=" top: 50%;left: 50%;transform: translate(-50%, -50%);position: fixed;">
+            <RadzenCard>
+                <RadzenTemplateForm TItem="Model" Data=@model Submit=@OnSubmit InvalidSubmit=@OnInvalidSubmit>
+                    <div class="row mb-2">
+                        <div class="col-lg-12">
+                            <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Enter password</RadzenText>
+                            <RadzenPassword Name="Password" @bind-Value=@model.Password Placeholder="Enter password..." Class="w-100" />
+                        </div>
+                        <div class="col-lg-12">
+                            <RadzenRequiredValidator Component="Password" Text="Password is required" Popup="true" Style="position: absolute" />
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <RadzenButton ButtonType="ButtonType.Submit" Text="Login" ButtonStyle="ButtonStyle.Success" />
+                    </div>
+                </RadzenTemplateForm>
+            </RadzenCard>
+        </div>
+    </div>
+</div>
+@code {
+    class Model
+    {
+        public string Password { get; set; }
+    }
+    Model model = new Model();
+    void OnSubmit(Model model)
+    {
+        NavManager.NavigateTo("/Agupta");
+    }
+    void OnInvalidSubmit(FormInvalidSubmitEventArgs args)
+    {
+        //console.Log("InvalidSubmit");
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

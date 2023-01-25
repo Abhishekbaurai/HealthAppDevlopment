@@ -1,0 +1,32 @@
+﻿@using Radzen
+@using Radzen.Blazor
+@using HealthAppDevlopment.DataModels
+
+<div class="table-responsive">
+	<table class="table table-bordered" style="width:100%">
+		<thead style="background-color:#eeeeee">
+			<tr>
+				<th>Category</th>
+				<th>Item</th>
+				<th>Quantity</th>
+				<th>Measure</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var foods in foodsummary)
+			{
+				<tr>
+					<td>@foods.Category</td>
+					<td>@foods.Item</td>
+					<td>@foods.Quantity</td>
+					<td>@foods.Measure</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>
+@code {
+	[Parameter]
+	public List<FoodSummary> foodsummary { get; set; }
+
+}

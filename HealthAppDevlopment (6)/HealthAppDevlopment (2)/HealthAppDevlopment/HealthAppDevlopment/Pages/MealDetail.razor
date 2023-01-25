@@ -1,0 +1,65 @@
+﻿@inject NavigationManager NavManager
+@using Radzen
+@using Radzen.Blazor
+@using HealthAppDevlopment.DataModels
+<style>
+	#summarybox {
+		height: 60px;
+		margin: 10px;
+		background-color: lightgray;
+		border-radius: 10px;
+	}
+
+	.btn-circle {
+		width: 30px;
+		height: 30px;
+		line-height: 30px;
+		text-align: center;
+		padding: 0;
+		border-radius: 50%;
+		float: right;
+		background-color: #EE7F31;
+		color:white;
+	}
+
+	label {
+		font-size: 15px;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.oi-plus {
+		color: white;
+	}
+	@@media only screen and (max-width: 600px) {
+	.demo{
+		font-size:13px;
+	}
+}
+</style>
+
+<RadzenCard Style="background-color:#eeeeee; border-radius:20px" Class="m-3">
+	<div>
+		<div class="row mb-2">
+			<div class="col-10 col-lg-6 col-md-10 col-sm-11 mt-2 demo" style="padding-right:0;"><b>@Meal.MealTypeCategory (@(Convert.ToDateTime(Meal.BestTime).ToString("hh:mm tt")))</b></div>
+			<div class="col-2 col-lg-6 col-md-2  col-sm-1 mt-1 demo" style="float:right;padding-right:23px;">
+				<button class="oi oi-plus btn btn-circle" @onclick="FoodList"></button>
+			</div>
+		</div>
+		<RadzenCard Style="background-color: white; border-radius: 15px">Discription</RadzenCard>
+	</div>
+</RadzenCard>
+
+@code {
+	[Parameter]
+	public MealModel Meal { get; set; }
+
+	protected void FoodList()
+	{
+		NavManager.NavigateTo("/description");
+	}
+}
+
+
+
+

@@ -1,0 +1,53 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = browser
+build_property.RootNamespace = HealthAppDevlopment
+build_property.RootNamespace = HealthAppDevlopment
+build_property.ProjectDir = C:\Users\MeetApp\source\repos\HealthAppDevlopment (2)\HealthAppDevlopment\HealthAppDevlopment\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\MeetApp\source\repos\HealthAppDevlopment (2)\HealthAppDevlopment\HealthAppDevlopment
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/MeetApp/source/repos/HealthAppDevlopment (2)/HealthAppDevlopment/HealthAppDevlopment/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MeetApp/source/repos/HealthAppDevlopment (2)/HealthAppDevlopment/HealthAppDevlopment/Pages/FamilyDetails.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmFtaWx5RGV0YWlscy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MeetApp/source/repos/HealthAppDevlopment (2)/HealthAppDevlopment/HealthAppDevlopment/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MeetApp/source/repos/HealthAppDevlopment (2)/HealthAppDevlopment/HealthAppDevlopment/Pages/MealDetail.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWVhbERldGFpbC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MeetApp/source/repos/HealthAppDevlopment (2)/HealthAppDevlopment/HealthAppDevlopment/Pages/MealFatDetailChart.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWVhbEZhdERldGFpbENoYXJ0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MeetApp/source/repos/HealthAppDevlopment (2)/HealthAppDevlopment/HealthAppDevlopment/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/MeetApp/source/repos/HealthAppDevlopment (2)/HealthAppDevlopment/HealthAppDevlopment/Pages/Description.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGVzY3JpcHRpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-81dntyzvcu
+
+[C:/Users/MeetApp/source/repos/HealthAppDevlopment (2)/HealthAppDevlopment/HealthAppDevlopment/Pages/Login.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW4ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-86jtqokk0a
+
+[C:/Users/MeetApp/source/repos/HealthAppDevlopment (2)/HealthAppDevlopment/HealthAppDevlopment/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-alskh9ix2d

@@ -1,0 +1,49 @@
+{
+  "id": 1,
+  "familyName": "Anuj Gupta",
+  "familyCode": "Agupta",
+  "address": "2018/44c, Chandigarh",
+  "uniqueCode": "19e3d65d-ea07-44a9-9cc0-4a1fdd39c4dc",
+  "familyMembers": [
+    {
+      "id": 1,
+      "familyId": 1,
+      "memberName": "Anuj Gupta",
+      "memberCode": "anujgupta",
+      "dateOfBirth": "1981-09-01T00:00:00",
+      "uniqueCode": "982ea739-217c-4726-ac9b-54523a8aa9d7",
+      "bloodGroup": "B+        ",
+      "familyMeberDtos": []
+    },
+    {
+      "id": 4,
+      "familyId": 1,
+      "memberName": "Aarav Gupta",
+      "memberCode": "aaravgupta",
+      "dateOfBirth": "2010-09-10T00:00:00",
+      "uniqueCode": "62262e8f-acab-4f7d-b61a-90f840282836",
+      "bloodGroup": "B+        ",
+      "familyMeberDtos": []
+    },
+    {
+      "id": 5,
+      "familyId": 1,
+      "memberName": "Aahnik Gupta",
+      "memberCode": "aahnikgupta",
+      "dateOfBirth": "2013-09-25T00:00:00",
+      "uniqueCode": "e7677234-9a19-46c5-bf04-c7221447bdc6",
+      "bloodGroup": "B+        ",
+      "familyMeberDtos": []
+    },
+    {
+      "id": 6,
+      "familyId": 1,
+      "memberName": "Kusum Gupta",
+      "memberCode": "KusumGuota",
+      "dateOfBirth": "1981-12-22T15:02:47.903",
+      "uniqueCode": "6b5362d8-d341-4d58-a1cc-5bb7e912624c",
+      "bloodGroup": "B+        ",
+      "familyMeberDtos": []
+    }
+  ]
+}

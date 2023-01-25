@@ -1,0 +1,220 @@
+﻿@page "/description"
+@using Radzen
+@using Radzen.Blazor
+@using HealthAppDevlopment.DataModels
+@inject HttpClient Http
+@inject NavigationManager NavManager
+@using HealthAppDevlopment.Services
+@inject IBaseApiClient BaseApiClient
+@*Main Container*@
+<div class="container-fluid mb-5" style="background-color: #eeeeee;">
+	@*Container for Back Button*@
+	<div class="row pt-2 mb-3">
+		<div class="col">
+			<RadzenButton class="oi oi-arrow-left" style="background-color:black" Click=@BackToMainMenu></RadzenButton>
+		</div>
+	</div>
+	@*Container for Cards*@
+	<div class="row">
+		<div class="col-12">
+			<RadzenCard Style="padding:0;" Text=".rz-border-radius-6" Class="rz-border-radius-6">
+				@if (FoodNutrition != null)
+				{
+					<div style="height:200px;" id="image-container">
+						<RadzenImage Path="@ImagePath" id="eggimg" style="height:200px;width:100%;border-radius: 20px 20px 0 0;object-fit: cover;" />
+						
+							<div id="image-title-container" class="card-img-overlay">
+								<RadzenText Class="card-img-overlay" Style="color:white;font-size:30px;" id="image-title">@FoodNutrition.FirstOrDefault().Name</RadzenText>
+							</div>
+						
+					</div>
+					<div class="card-body">
+						<div class="row">
+							<div class="col-6">
+								<RadzenText TagName="TagName.H3">Category</RadzenText>
+								<RadzenDropDown TValue="string" Data=@EnumValues Placeholder="Select" @bind-Value="Summary.Category" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" Change=@(OnChange) Style="width:100%"></RadzenDropDown>
+							</div>
+							<div class="col-6">
+								<RadzenText TagName="TagName.H3">Items</RadzenText>
+								<RadzenDropDown TValue="string" Data="@DataListofFoodName.Select(x =>x)" @bind-Value="Summary.Item" Placeholder="Select" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" Disabled="Disabled1" Change=@(args =>FruitDetailFunc(args)) Style="width:100%"></RadzenDropDown>
+							</div>
+							<div class="col-6">
+								<RadzenText TagName="TagName.H3" class="mt-2">Quantity</RadzenText>
+								<RadzenDropDown TValue="string" Data="@ServingDescriptionList.Select(x=>x)" Placeholder="Select" @bind-Value="Summary.Quantity" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" Style="width:100%" Disabled="Disabled2"></RadzenDropDown>
+							</div>
+							<div class="col-6">
+								<RadzenText TagName="TagName.H3" class="mt-2">Measure</RadzenText>
+								<RadzenDropDown TValue="double" Data=@ServingWeightList.Select(x=>x) Placeholder="Select" @bind-Value="Summary.Measure" Style="width:100%" Disabled="Disabled2"></RadzenDropDown>
+							</div>
+						</div>
+					</div>
+				}
+			</RadzenCard>
+		</div>
+		<div class="col">
+			<RadzenText TextStyle="TextStyle.H5" class="h5 mt-3 mb-3 px-1">@NutrientType</RadzenText>
+		</div>
+		<div class="col-12">
+			@if (MealInformation != null)
+			{
+				@foreach (var meal in MealInformation)
+				{
+					<MealFatDetailChart mealDescription="@meal"></MealFatDetailChart>
+				}
+			}
+
+		</div>
+	</div>
+
+		@*	Adding summary of selected item in table*@
+	<RadzenCard Class="rz-border-radius-4 mt-4 ">
+		<Summary foodsummary="foodSummaries"></Summary>
+	</RadzenCard>
+
+	@*Container for button*@
+	<div class="row p-0 d-flex justify-content-center" id="button" style="background-color: #eeeeee;">
+		<div class="col-lg-5 col-md-5 col-sm-12" style="position:fixed;bottom:0;overflow: hidden;">
+			<RadzenButton ButtonStyle="ButtonStyle.Warning" Text="Add" Click="@additemtolist" Style="width:100%" class="text-center p-1" />
+		</div>
+	</div>
+</div>
+
+
+@code {
+	public FoodNutrition[]? FoodNutrition { get; set; }
+	public Boolean Disabled1 = true;
+	public Boolean Disabled2 = true;
+	public string BaseUrl = "https://myhealthdiet.azurewebsites.net";
+	public string Error;
+	List<string> DataListofFoodName = new List<string>();
+	List<string> ServingDescriptionList = new List<string>();
+	public List<double> ServingWeightList { get; set; } = new List<double>();
+	public FoodItem food;
+	string[] EnumValues = Enum.GetNames(typeof(FoodGroup));
+	public string NutrientType = "Macronutrients Breakdown";
+	public string ImagePath = "https://images5.alphacoders.com/103/1035321.jpg";
+	enum FoodGroup
+	{
+		Fruits,
+		Vegetables,
+		BakedFood,
+		Dairy,
+		BreakfastCereals,
+		Beverages,
+		FastFood,
+		GrainsAndPasta,
+		Meats,
+		NutsAndSeeds,
+		Snacks
+	}
+	List<FoodItem> foodItemName = new List<FoodItem>()
+	{
+		new FoodItem(){FoodNameId=1,FoodName="Lemons",FoodType="Fruits"},
+		new FoodItem(){FoodNameId=2,FoodName="Lemon Juice Raw",FoodType="Fruits"},
+		new FoodItem(){FoodNameId=3,FoodName="Raspberries",FoodType="Fruits"},
+		new FoodItem(){FoodNameId=4,FoodName="Asparagus",FoodType="Vegetables"},
+		new FoodItem(){FoodNameId=5,FoodName="Dutch Apple Pie",FoodType="BakedFood"},
+
+	};	
+	public List<MealDescription> MealInformation = new List<MealDescription>();
+	public List<QuantityMeasureModel> quantityMeasureModels = new List<QuantityMeasureModel>();
+
+	protected override async Task OnInitializedAsync()
+	{
+		try
+		{
+			var postParams = new Dictionary<string, string> { { "foodName", "Lemon"} };
+			FoodNutrition = await BaseApiClient.Request<FoodNutrition[]>(BaseUrl + "/FoodNutrition/GetFoodNutritionByName", "POST", postParams);
+			if (FoodNutrition != null && FoodNutrition.Any())
+			{
+
+				var b = new List<QuantityMeasureModel>
+				{
+					new QuantityMeasureModel {Name="Lemons",ServingDescriptionVariable=FoodNutrition.FirstOrDefault().ServingDescription1,ServingWeightVariable=FoodNutrition.FirstOrDefault().ServingWeight1},
+					new QuantityMeasureModel {Name="Lemons",ServingDescriptionVariable=FoodNutrition.FirstOrDefault().ServingDescription2,ServingWeightVariable=FoodNutrition.FirstOrDefault().ServingWeight2},
+					new QuantityMeasureModel {Name="Lemons",ServingDescriptionVariable=FoodNutrition.FirstOrDefault().ServingDescription3,ServingWeightVariable=FoodNutrition.FirstOrDefault().ServingWeight3},
+					new QuantityMeasureModel {Name="Lemon Juice Raw",ServingDescriptionVariable=FoodNutrition.FirstOrDefault().ServingDescription1,ServingWeightVariable=FoodNutrition.FirstOrDefault().ServingWeight1},
+					new QuantityMeasureModel {Name="Lemon Juice Raw",ServingDescriptionVariable=FoodNutrition.FirstOrDefault().ServingDescription2,ServingWeightVariable=FoodNutrition.FirstOrDefault().ServingWeight2},
+					new QuantityMeasureModel {Name="Lemon Juice Raw",ServingDescriptionVariable=FoodNutrition.FirstOrDefault().ServingDescription3,ServingWeightVariable=FoodNutrition.FirstOrDefault().ServingWeight3},
+					new QuantityMeasureModel {Name="Raspberries",ServingDescriptionVariable=FoodNutrition.FirstOrDefault().ServingDescription1,ServingWeightVariable=FoodNutrition.FirstOrDefault().ServingWeight1},
+					new QuantityMeasureModel {Name="Raspberries",ServingDescriptionVariable=FoodNutrition.FirstOrDefault().ServingDescription2,ServingWeightVariable=FoodNutrition.FirstOrDefault().ServingWeight2},
+					new QuantityMeasureModel {Name="Raspberries",ServingDescriptionVariable=FoodNutrition.FirstOrDefault().ServingDescription3,ServingWeightVariable=FoodNutrition.FirstOrDefault().ServingWeight3},
+					new QuantityMeasureModel {Name="Asparagus",ServingDescriptionVariable=FoodNutrition.FirstOrDefault().ServingDescription1,ServingWeightVariable=FoodNutrition.FirstOrDefault().ServingWeight1},
+					new QuantityMeasureModel {Name="Asparagus",ServingDescriptionVariable=FoodNutrition.FirstOrDefault().ServingDescription2,ServingWeightVariable=FoodNutrition.FirstOrDefault().ServingWeight2},
+					new QuantityMeasureModel {Name="Asparagus",ServingDescriptionVariable=FoodNutrition.FirstOrDefault().ServingDescription3,ServingWeightVariable=FoodNutrition.FirstOrDefault().ServingWeight3},
+					new QuantityMeasureModel {Name="Dutch Apple Pie",ServingDescriptionVariable=FoodNutrition.FirstOrDefault().ServingDescription1,ServingWeightVariable=FoodNutrition.FirstOrDefault().ServingWeight1},
+					new QuantityMeasureModel {Name="Dutch Apple Pie",ServingDescriptionVariable=FoodNutrition.FirstOrDefault().ServingDescription2,ServingWeightVariable=FoodNutrition.FirstOrDefault().ServingWeight2},
+					new QuantityMeasureModel {Name="Dutch Apple Pie",ServingDescriptionVariable=FoodNutrition.FirstOrDefault().ServingDescription3,ServingWeightVariable=FoodNutrition.FirstOrDefault().ServingWeight3},
+
+				};
+				var a = new MealDescription
+					{
+						Calories = FoodNutrition.FirstOrDefault().Calories,
+						NetWeight = 50,
+						Nutrients = new List<Nutrients>
+							{
+								new Nutrients { NutrientIconLink = "fa-solid fa-droplet", NutrientType = "Proteins", NutrientValue = FoodNutrition.FirstOrDefault().Protein},
+								new Nutrients { NutrientIconLink = "fa-solid fa-droplet", NutrientType = "Facts", NutrientValue = FoodNutrition.FirstOrDefault().Fat},
+								new Nutrients { NutrientIconLink = "fa-solid fa-droplet", NutrientType = "Carbs", NutrientValue =FoodNutrition.FirstOrDefault().Carbohydrate},
+								new Nutrients { NutrientIconLink = "fa-solid fa-droplet", NutrientType = "Fiber", NutrientValue = FoodNutrition.FirstOrDefault().Fiber},
+							}
+					};
+
+				if (a != null)
+				{
+					MealInformation.Add(a);
+				}
+				if (b != null)
+				{
+					quantityMeasureModels.AddRange(b);
+				}
+			}
+		}
+		catch (Exception e)
+		{
+			Error = e.Message;
+		}
+
+	}
+	
+	public void OnChange(object value)
+	{
+		var str = value is IEnumerable<object> ? string.Join(", ", (IEnumerable<object>)value) : value;
+		DataListofFoodName = foodItemName.Where(e => e.FoodType == str.ToString()).Select(a => a.FoodName).ToList();
+		Disabled1 = false;
+	}
+	public async void FruitDetailFunc(object value)
+	{
+		var str = value is IEnumerable<object> ? string.Join(", ", (IEnumerable<object>)value) : value;
+		Disabled2 = false;
+		ServingDescriptionList = quantityMeasureModels.Where(e => e.Name == str.ToString()).Select(a => a.ServingDescriptionVariable).ToList();
+		ServingWeightList = quantityMeasureModels.Where(e => e.Name == str.ToString()).Select(a => a.ServingWeightVariable).ToList();
+	}
+	protected void BackToMainMenu()
+	{
+		NavManager.NavigateTo("/index");
+	}
+
+	//List of selected food item
+	public List<FoodSummary> foodSummaries = new List<FoodSummary>();
+
+	public void additemtolist()
+	{
+		if (Summary.Category != null && Summary.Item != null && Summary.Quantity != null && Summary.Measure != null)
+		{
+			foodSummaries.Add(new FoodSummary
+				{
+					Category = Summary.Category,
+					Item = Summary.Item,
+					Quantity = Summary.Quantity,
+					Measure = Summary.Measure
+				});
+			ResetDetails();
+		}
+	}
+	public FoodSummary Summary = new FoodSummary();
+	public void ResetDetails()
+	{
+		Summary = new FoodSummary();
+	}	
+}

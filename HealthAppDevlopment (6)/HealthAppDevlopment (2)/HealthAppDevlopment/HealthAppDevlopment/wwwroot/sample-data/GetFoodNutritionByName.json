@@ -1,0 +1,27 @@
+[
+  {
+    "id": 39,
+    "name": "Muscadine Grapes",
+    "foodGroupId": 1,
+    "calories": 57.00,
+    "fat": 0.47,
+    "protein": 0.81,
+    "carbohydrate": 13.93,
+    "fiber": 3.90,
+    "vitaminAIU": 67.00,
+    "vitaminARAE": 3.00,
+    "vitaminB12": 0.00,
+    "vitaminC": 6.50,
+    "vitaminD": 0.00,
+    "vitaminE": 0.00,
+    "servingWeight1": 6.00,
+    "servingDescription1": "1 grape",
+    "servingWeight2": 0.00,
+    "servingDescription2": "0",
+    "servingWeight3": 0.00,
+    "servingDescription3": "0"
+  }
+]
+
+
+

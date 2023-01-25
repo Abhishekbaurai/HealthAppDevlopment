@@ -1,0 +1,98 @@
+[
+  {
+    "id": 2,
+    "mealTypeCategory": "Pre Breakfast",
+    "calories": 100.0,
+    "proteins": 4.0,
+    "fats": 4.0,
+    "carbs": 4.0,
+    "fiber": 4.0,
+    "bestTime": "2023-01-04T07:00:00",
+    "order": 1,
+    "Discription": "All you need is some healthy meal:sandwich::fried_egg:"
+  },
+  {
+    "id": 1,
+    "mealTypeCategory": "Breakfast",
+    "calories": 500.0,
+    "proteins": 20.0,
+    "fats": 10.0,
+    "carbs": 40.0,
+    "fiber": 5.0,
+    "bestTime": "2023-01-04T08:00:00",
+    "order": 5,
+    "Discription": "All you need is some healthy meal:sandwich::fried_egg:"
+  },
+  {
+    "id": 5,
+    "mealTypeCategory": "Morning Snack",
+    "calories": 150.0,
+    "proteins": 10.0,
+    "fats": 10.0,
+    "carbs": 10.0,
+    "fiber": 10.0,
+    "bestTime": "2023-01-04T11:30:00",
+    "order": 10,
+    "Discription": "Get energized by grabbing a morning snack:fries::cup_with_straw:"
+  },
+  {
+    "id": 4,
+    "mealTypeCategory": "Brunch",
+    "calories": 150.0,
+    "proteins": 4.0,
+    "fats": 4.0,
+    "carbs": 4.0,
+    "fiber": 4.0,
+    "bestTime": "2023-01-04T11:30:00",
+    "order": 15,
+    "Discription": "Don't miss lunch:bento:its time to get a tasty meal"
+  },
+  {
+    "id": 6,
+    "mealTypeCategory": "Lunch",
+    "calories": 450.0,
+    "proteins": 20.0,
+    "fats": 10.0,
+    "carbs": 40.0,
+    "fiber": 5.0,
+    "bestTime": "2023-01-04T14:00:00",
+    "order": 20,
+    "Discription": "Don't miss lunch:bento:its time to get a tasty meal"
+  },
+  {
+    "id": 7,
+    "mealTypeCategory": "Evening Snack",
+    "calories": 150.0,
+    "proteins": 10.0,
+    "fats": 10.0,
+    "carbs": 10.0,
+    "fiber": 10.0,
+    "bestTime": "2023-01-04T17:30:00",
+    "order": 25,
+    "Discription": "Refuel your body with a tasty delecious evening snack:stuffed_flatbread:"
+  },
+  {
+    "id": 8,
+    "mealTypeCategory": "Dinner",
+    "calories": 300.0,
+    "proteins": 20.0,
+    "fats": 10.0,
+    "carbs": 40.0,
+    "fiber": 5.0,
+    "bestTime": "2023-01-04T19:00:00",
+    "order": 30,
+    "Discription": "An early dinner can help you sleep better:green_salad::glass_of_milk:"
+  },
+  {
+    "id": 9,
+    "mealTypeCategory": "After Dinner",
+    "calories": 150.0,
+    "proteins": 0.0,
+    "fats": 0.0,
+    "carbs": 0.0,
+    "fiber": 0.0,
+    "bestTime": "2023-01-04T20:00:00",
+    "order": 35,
+    "Discription": "An early dinner can help you sleep better:green_salad::glass_of_milk:"
+  }
+]
